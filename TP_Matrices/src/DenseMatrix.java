@@ -1,3 +1,6 @@
+import java.util.Random;
+
+
 public class DenseMatrix
 	{
 	private int nRow;
@@ -25,12 +28,17 @@ public class DenseMatrix
 	
 	public static void main(String args[])
 		{
-		DenseMatrix laMatrice = new DenseMatrix(3, 2);
-		laMatrice.display();
+		
+		DenseMatrix laMatrice = aleaMatrix(3, 2);
 		laMatrice.set(3, 2, 1);
+		laMatrice = laMatrice.sum(laMatrice);
 		laMatrice.display();
-		laMatrice = laMatrice.mult(new DenseMatrix(laMatrice.vals));
-		laMatrice.display();
+		
+		DenseMatrix B = aleaMatrix(2, 3);
+		B.display();
+		laMatrice = laMatrice.mult(B);
+		
+		laMatrice = laMatrice.transpose();
 		
 		
 		
@@ -45,9 +53,17 @@ public class DenseMatrix
 		{
 		return vals[i-1][j-1];
 		}
+	public double get(int i, int j, boolean exact)
+		{
+		return vals[i][j];
+		}
 	public void set(int i, int j, double aij)
 		{
 		vals[i-1][j-1] = aij;
+		}
+	public void set(int i, int j, double aij, boolean exact)
+		{
+		vals[i][j] = aij;
 		}
 	public int getRowDimension()
 		{
@@ -97,9 +113,9 @@ public class DenseMatrix
 	public DenseMatrix mult(double s)
 		{
 		double[][] laValeur = new double[this.nRow][this.getColDimension()];
-		for(int i=0; i<this.nRow; i++)
+		for(int i=0; i<this.nCol; i++)
 			{
-			for(int j=0; j<this.nCol; j++)
+			for(int j=0; j<this.nRow; j++)
 				{
 				laValeur[i][j] = vals[i][j] * s;
 				}
@@ -108,23 +124,49 @@ public class DenseMatrix
 		}
 	public DenseMatrix mult(DenseMatrix B)
 		{
-		double[][] laValeur1 = new double[this.nRow][this.getColDimension()];
-		double[][] laValeur2 = new double[B.nRow][B.getColDimension()];
-		double[][] laValeur = new double[this.nRow][B.getColDimension()];
-		for(int j=0; j<this.nCol; j++)
+		DenseMatrix laValeur = new DenseMatrix(this.getRowDimension(), B.nCol);
+		System.out.println("laValeur ");
+		laValeur.display();
+		for(int i=0; i<B.nRow; i++)
 			{
-			for(int i=0; i<B.nRow; i++)
+			for(int j=0; j<this.nCol; j++)
 				{
-				laValeur2[j][i] = 
+				for(int k=0; k<2; k++)
+					{
+					System.out.println("i=" + i);
+					System.out.println("j=" + j);
+					laValeur.vals[i][j] += (B.vals[i][j] * this.vals[j][i]);
+					laValeur.display();
+					}
 				}
 			}
+		return laValeur;
+		}
+	public DenseMatrix transpose()
+		{
+		DenseMatrix laValeur = new DenseMatrix(new double[this.nCol][this.nRow]);
 		for(int i=0; i<this.nRow; i++)
 			{
-			for(int j=0; j<this.nRow; j++)
+			for(int j=0; j<this.nCol; j++)
 				{
-				laValeur[i][j] = this.get(i, i)* B.vals[j][i];
+				laValeur.vals[j][i] = this.get(i, j, true);
+				}
+			}	
+		return laValeur;
+		}
+	
+	
+	public static DenseMatrix aleaMatrix(int n, int m)
+		{
+		Random rand = new Random();
+		DenseMatrix matrice = new DenseMatrix(n, m);
+		for(int i=0; i<matrice.nRow; i++)
+			{
+			for(int j=0; j<matrice.nCol; j++)
+				{
+				matrice.vals[i][j] = (double) rand.nextInt(1)+1;
 				}
 			}
-		return new DenseMatrix(laValeur);
+		return matrice;
 		}
 	}
