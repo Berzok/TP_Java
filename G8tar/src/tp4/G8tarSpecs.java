@@ -1,3 +1,4 @@
+package tp4;
 
 
 public class G8tarSpecs extends InstrumentSpec {

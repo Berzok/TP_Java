@@ -1,6 +1,7 @@
+package tp4;
 
 
-public class FindGuitarTester
+public class Client
 	{
 
 	public static void main(String[] args)
@@ -13,7 +14,7 @@ public class FindGuitarTester
 		inventory.display(whatErinLikes);
 		}
 
-	private static void initializeInventory(Inventory inventory)
+	public static void initializeInventory(Inventory inventory)
 		{
 		inventory.addInstrument("11277", 3999.95, new G8tarSpecs(Builder.COLLINGS, "CJ", 3, Type.ACOUSTIC, Wood.INDIAN_ROSEWOOD, Wood.SITKA));
 		inventory.addInstrument("V95693", 1499.95, new G8tarSpecs(Builder.FENDER, "Stratocastor", 5, Type.ELECTRIC, Wood.ALDER, Wood.ALDER));

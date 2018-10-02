@@ -1,3 +1,4 @@
+package paquet;
 
 
 import java.util.Iterator;
@@ -56,5 +57,15 @@ public class Inventory {
 			matchingInstruments.add(instrument);
 		}
 		return matchingInstruments;
+	}
+
+	public Instrument getInstrument(String serialNumber) {
+		for (Iterator<Instrument> i = instruments.iterator(); i.hasNext();) {
+			Guitar guitar = (Guitar) i.next();
+			if (guitar.getSerialNumber().equals(serialNumber)) {
+				return guitar;
+			}
+		}
+		return null;
 	}
 }

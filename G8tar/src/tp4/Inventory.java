@@ -1,3 +1,4 @@
+package tp4;
 
 
 import java.util.Iterator;
@@ -26,14 +27,10 @@ public class Inventory {
 		}
 	}
 
-	public void addInstrument(String serialNumber, double price, InstrumentSpec instrSpec) {
-		if (instrSpec instanceof G8tarSpecs) {
-			instruments.add(new Guitar(serialNumber, price, instrSpec));
+	public void addInstrument(String serialNumber, double price, InstrumentSpec instrSpec)
+		{
+		instruments.add(new Instrument(serialNumber, price, instrSpec));
 		}
-		else if (instrSpec instanceof MandolinSpec) {
-			instruments.add(new Mandolin(serialNumber, price, instrSpec));
-		}
-	}
 
 	public Guitar getGuitar(String serialNumber) {
 		for (Iterator<Instrument> i = instruments.iterator(); i.hasNext();) {
@@ -45,16 +42,25 @@ public class Inventory {
 		return null;
 	}
 
-	public List<Instrument> search(InstrumentSpec searchInstr) {
+	public List<Instrument> search(InstrumentSpec searchSpec)
+		{
 		List<Instrument> matchingInstruments = new LinkedList<Instrument>();
-		for (Iterator<Instrument> i = instruments.iterator(); i.hasNext();) {
-			Instrument instrument = i.next();
-			// Ignore serial number since that's unique
-			// Ignore price since that's unique
-			if (!searchInstr.matches(instrument.getInstrumentSpec()))
-				continue;
-			matchingInstruments.add(instrument);
-		}
+		for(Iterator<Instrument> i = instruments.iterator(); i.hasNext();)
+			{
+			Instrument instru = i.next();
+			if(instru.getSpec().matches(searchSpec))
+				matchingInstruments.add(instru);
+			}
 		return matchingInstruments;
+		}
+
+	public Instrument getInstrument(String serialNumber) {
+		for (Iterator<Instrument> i = instruments.iterator(); i.hasNext();) {
+			Guitar guitar = (Guitar) i.next();
+			if (guitar.getSerialNumber().equals(serialNumber)) {
+				return guitar;
+			}
+		}
+		return null;
 	}
 }

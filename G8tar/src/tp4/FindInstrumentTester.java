@@ -1,6 +1,7 @@
+package tp4;
 
 
-public class FindGuitarTester
+public class FindInstrumentTester
 	{
 
 	public static void main(String[] args)
@@ -9,7 +10,7 @@ public class FindGuitarTester
 		Inventory inventory = new Inventory();
 		initializeInventory(inventory);
 
-		Guitar whatErinLikes = new Guitar("", 0, new G8tarSpecs(Builder.FENDER, "Stratocastor", 4, Type.ELECTRIC, Wood.ALDER, Wood.ALDER));
+		Guitar whatErinLikes = new Guitar("", 0, new G8tarSpecs(Builder.FENDER, "Poulet", 6, Type.ELECTRIC, Wood.ALDER, Wood.ALDER));
 		inventory.display(whatErinLikes);
 		}
 
@@ -26,6 +27,8 @@ public class FindGuitarTester
 		inventory.addInstrument("1092", 12995.95, new G8tarSpecs(Builder.OLSON, "SJ", 5, Type.ACOUSTIC, Wood.INDIAN_ROSEWOOD, Wood.CEDAR));
 		inventory.addInstrument("566-62", 8999.95, new G8tarSpecs(Builder.RYAN, "Cathedral", 4, Type.ACOUSTIC, Wood.COCOBOLO, Wood.CEDAR));
 		inventory.addInstrument("6 29584", 2100.95, new G8tarSpecs(Builder.PRS, "Dave Navarro Signature", 3, Type.ELECTRIC, Wood.MAHOGANY, Wood.MAPLE));
+		inventory.addInstrument("6 29584", 2100.95, new G8tarSpecs(Builder.PRS, "Poulet", 12, Type.ELECTRIC, Wood.MAHOGANY, Wood.MAPLE));
+		
 		inventory.addInstrument("9019920", 5495.99, new MandolinSpec(Builder.PRS, "DRSM-008 E", Style.F, Type.ELECTRIC, Wood.MAPLE, Wood.MAPLE));
 		inventory.addInstrument("7819920", 5400.99, new MandolinSpec(Builder.GIBSON, "F-5G", Style.A, Type.ELECTRIC, Wood.MAPLE, Wood.MAPLE));
 		}
