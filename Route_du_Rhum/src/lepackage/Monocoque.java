@@ -7,9 +7,6 @@ public class Monocoque extends Voilier{
 		}
 	
 	
-	public void appliqueSuivreRoute(SuivreRoute laRoute){
-		
-		}
 	
 	public String toString(){
 		return super.toString() + ", fier monocoque";

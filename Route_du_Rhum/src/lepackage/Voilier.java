@@ -10,6 +10,10 @@ public abstract class Voilier
 		this.suivreRoute = laRoute;
 		}
 	
+	public void appliqueSuivreRoute(){
+		this.suivreRoute.suivreRoute();
+		}
+	
 	
 	public void setRoute(SuivreRoute laRoute){
 		this.suivreRoute = laRoute;
