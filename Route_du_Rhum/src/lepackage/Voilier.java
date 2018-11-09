@@ -9,6 +9,9 @@ public abstract class Voilier
 		this.chNom = leNom;
 		this.suivreRoute = laRoute;
 		}
+	public Voilier(){
+		
+	}
 	
 	public void appliqueSuivreRoute(){
 		this.suivreRoute.suivreRoute();
