@@ -2,7 +2,7 @@ package observateur;
 
 import java.util.GregorianCalendar;
 
-public class Position {
+public class Position implements Comparable<Position>{
 	String nom, skipper;
 	double distance;
 	boolean abandon;
@@ -25,6 +25,14 @@ public class Position {
 	}
 	public boolean getAbandon(){
 		return abandon;
+	}
+
+	public GregorianCalendar getDate() {
+		return dateEtHeure;
+	}
+	
+	public int compareTo(Position pos){
+		return dateEtHeure.compareTo(pos.getDate());
 	}
 	
 }

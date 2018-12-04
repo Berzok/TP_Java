@@ -1,15 +1,14 @@
 package observateur;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 public class Abandons implements Observateur{
 	
-	List <String> listeAbandons = new ArrayList<String>();
+	HashSet <String> listeAbandons;
 	
 	public Abandons(){
-
+		listeAbandons = new HashSet<String>();
 	}
 
 	@Override
@@ -17,23 +16,17 @@ public class Abandons implements Observateur{
 		Set <Position> ensemble = ((Classements) o).getDernierClassement();
 		for(Position pos : ensemble){
 			if(pos.getAbandon()){
-				if(!(listeAbandons.contains(pos))){
-					listeAbandons.add(pos.getSkipper());
-				}
+				listeAbandons.add(pos.getSkipper());
 			}
 		}		
 	}
 	
-	public List <String>getAbandons(){
+	public HashSet<String> getAbandons(){
 		return listeAbandons;
 	}
 	
 	public String toString(){
-		String leString = "";
-		for(String s : listeAbandons){
-			leString = (s + "\n");
-		}
-		return leString;
+		return listeAbandons.toString();
 	}
 
 }

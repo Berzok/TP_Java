@@ -17,6 +17,7 @@ public class Classements implements Observable{
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void ajoutClassement(Set leSet){
 		listeClassements.add(leSet);
+		
 		this.informerObservateurs();
 	}
 	
@@ -42,10 +43,7 @@ public class Classements implements Observable{
 	}
 	
 	public String toString(){
-		String leString = "";
-		for(Set <Position> leSet : listeClassements){
-		}
-		return leString;
+		return listeClassements.toString();
 	}
 
 }

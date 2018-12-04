@@ -1,11 +1,11 @@
 package client;
 
+import strategie.Multicoque;
+import strategie.RouteDeLaSoie;
+import strategie.RouteDesAlizes;
+import strategie.Voilier;
 import decorateur.CanonOrbital;
 import decorateur.Poisson_pas_frais;
-import Strategie.Multicoque;
-import Strategie.RouteDeLaSoie;
-import Strategie.RouteDesAlizes;
-import Strategie.Voilier;
 
 public class Cliente {
 

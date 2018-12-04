@@ -1,7 +1,7 @@
 package decorateur;
 
-import Strategie.SuivreRoute;
-import Strategie.Voilier;
+import strategie.SuivreRoute;
+import strategie.Voilier;
 
 public abstract class ArmementSupplementaire extends Voilier
 	{

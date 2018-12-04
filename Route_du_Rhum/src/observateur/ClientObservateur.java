@@ -12,17 +12,20 @@ public class ClientObservateur {
 		
 		Classements leRhum = new Classements();
 		Abandons abandonsRhum = new Abandons();
+		Arrivees soulardsRhum = new Arrivees();
 		
 		leRhum.enregistrer(abandonsRhum);
+		leRhum.enregistrer(soulardsRhum);
 		
 		File[] filesXML = new File("data_2018").listFiles();
+		
 		
 		for(File leFichier : filesXML){
 			Set lesPositions = LectureFichierXML.lecture(leFichier);
 			leRhum.ajoutClassement(lesPositions);
 //			System.out.println(lesPositions.size() + " " + lesPositions);
 		}
-	System.out.println("" + leRhum.listeObservateurs.get(leRhum.listeObservateurs.size()-1).toString());
+		soulardsRhum.afficher();
 	}
 
 }

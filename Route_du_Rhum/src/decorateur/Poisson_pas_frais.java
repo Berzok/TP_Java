@@ -1,6 +1,6 @@
 package decorateur;
 
-import Strategie.Voilier;
+import strategie.Voilier;
 
 public class Poisson_pas_frais extends ArmementSupplementaire{
 
