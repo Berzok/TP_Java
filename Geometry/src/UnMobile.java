@@ -5,33 +5,48 @@ class UnMobile extends JPanel implements Runnable
 {
     int saLargeur, saHauteur;
     int laHauteur;
-    int sonDebDessin = 0;
+    int posX = 0;
     final int sonPas = 10, sonTemps=50, sonCote=40;
     int xVel = 1;
     int yVel = 1;
     
     UnMobile(int telleLargeur, int telleHauteur)
-    {
-	super();
-	saLargeur = telleLargeur;
-	laHauteur = telleHauteur;
-	saHauteur = laHauteur/2;
-	setSize(telleLargeur, laHauteur);
-    }
+	    {
+		super();
+		saLargeur = telleLargeur;
+		laHauteur = telleHauteur;
+		saHauteur = 40;
+		setSize(telleLargeur, laHauteur);
+		this.setForeground(Color.CYAN);
+	    }
     
     public void deplacer(){
     	switch(xVel){
     	case 1:
     		switch(yVel){
     		case 1: sud_Est();
+					return;
     		case 0: est();
-    		case -1: nord_Ouest();
+					return;
+    		case -1: nord_Est();
+					 return;
     		}
     	case 0:
     		switch(yVel){
     		case 1: sud();
-    		case 0: ;
+					return;
+    		case 0: return;
     		case -1: nord();
+					 return;
+    		}
+    	case -1:
+    		switch(yVel){
+    		case 1: sud_Ouest();
+    				return;
+    		case 0: ouest();
+    				return;
+    		case -1: nord_Est();
+					 return;
     		}
     	}
     }
@@ -39,138 +54,158 @@ class UnMobile extends JPanel implements Runnable
     public void run()
     	{
     	while(true){
-    		switch(xVel){
-    		case 1:
-    			switch(yVel){
-    				case 1:
-    					for(; sonDebDessin < saLargeur - sonPas || saHauteur < laHauteur-sonPas; sonDebDessin += sonPas, saHauteur += sonPas)
-    						{
-    						repaint();
-    						try{Thread.sleep(sonTemps);}
-    						catch (InterruptedException telleExcp)
-    							{telleExcp.printStackTrace();}
-    						}
-    					if(sonDebDessin>saLargeur-sonPas)
-    						xVel = -1;
-    					else
-    						yVel = -1;
-    					break;
-    				case 0:
-    					for(; sonDebDessin < saLargeur - sonPas; sonDebDessin += sonPas)
-    						{
-    						repaint();
-    						try{Thread.sleep(sonTemps);}
-    						catch (InterruptedException telleExcp)
-    							{telleExcp.printStackTrace();}
-    						}
-    					xVel = -1;
-    					break;
-    				case -1:
-    					for(; sonDebDessin > saLargeur - sonPas || saHauteur > laHauteur; sonDebDessin += sonPas, saHauteur -= sonPas){
-    						repaint();
-    						try{Thread.sleep(sonTemps);}
-    						catch (InterruptedException telleExcp)
-    							{telleExcp.printStackTrace();}
-    						}
-    					yVel = 1;
-    					break;
-    				}
+    		deplacer();
     		
-    		case 0:
-    			switch(yVel){
-    				case 1:
-    					for(; saHauteur < laHauteur; saHauteur += sonPas)
-    						{
-    						repaint();
-    						try{Thread.sleep(sonTemps);}
-    						catch (InterruptedException telleExcp)
-    							{telleExcp.printStackTrace();}
-    						}
-    					yVel = -1;
-    					break;
-    				case 0:
-    					for(; sonDebDessin < saLargeur - sonPas; sonDebDessin += sonPas)
-    						{
-    						repaint();
-    						try{Thread.sleep(sonTemps);}
-    						catch (InterruptedException telleExcp)
-    							{telleExcp.printStackTrace();}
-    						}
-    					xVel = -1;
-    					break;
-    				case -1:
-    					for(; saHauteur > 0; saHauteur -= sonPas){
-    						repaint();
-    						try{Thread.sleep(sonTemps);}
-    						catch (InterruptedException telleExcp)
-    							{telleExcp.printStackTrace();}
-    						}
-    					yVel = 1;
-    					break;
-    				}
-    		
-    		case -1:
-    			switch(yVel){
-    				case 1:
-    					for(; sonDebDessin > 0 + sonPas || saHauteur < laHauteur - saHauteur; sonDebDessin -= sonPas, saHauteur += sonPas)
-    						{
-    						repaint();
-    						try{Thread.sleep(sonTemps);}
-    						catch (InterruptedException telleExcp)
-    							{telleExcp.printStackTrace();}
-    						}
-    					yVel = -1;
-    					break;
-    				case 0:
-    					for(; sonDebDessin > 0; sonDebDessin -= sonPas)
-    						{
-    						repaint();
-    						try{Thread.sleep(sonTemps);}
-    						catch (InterruptedException telleExcp)
-    							{telleExcp.printStackTrace();}
-    						}
-    					xVel = 1;
-    					break;
-    				case -1:
-    					for(; sonDebDessin > 0 || saHauteur > laHauteur; sonDebDessin -= sonPas, saHauteur -= sonPas){
-    						repaint();
-    						try{Thread.sleep(sonTemps);}
-    						catch (InterruptedException telleExcp)
-    							{telleExcp.printStackTrace();}
-    						}
-    					yVel = 1;
-    					break;
-    				}
-    		
-    		default:
-    			break;
-    		}
     		}
     	}
     
     
     public void nord(){
-    	
+    	while(true){
+			repaint();
+			try{Thread.sleep(sonTemps);}
+			catch (InterruptedException telleExcp)
+			{telleExcp.printStackTrace();}
+			saHauteur -= sonPas;
+			if(saHauteur < sonCote){
+				yVel = 1;
+				break;
+			}
+		}
+    	return;
     }
+    
     public void nord_Est(){
+    	while(true){
+			repaint();
+			try{Thread.sleep(sonTemps);}
+			catch (InterruptedException telleExcp)
+			{telleExcp.printStackTrace();}
+			posX += sonPas;
+			saHauteur -= sonPas;
+			if(posX > saLargeur-sonPas){
+				xVel = -1;
+				break;
+			}
+			if(saHauteur < sonCote){
+				yVel =-1;
+				break;
+			}
+		}
+    	return;
     }
     public void est(){
+    	while(true){
+			repaint();
+			try{Thread.sleep(sonTemps);}
+			catch (InterruptedException telleExcp)
+			{telleExcp.printStackTrace();}
+			posX += sonPas;
+			if(posX > saLargeur-sonPas){
+				xVel = 1;
+				break;
+			}
+		}
+    	return;
     }
     public void sud_Est(){
+    	while(true){
+			repaint();
+			try{Thread.sleep(sonTemps);}
+			catch (InterruptedException telleExcp)
+			{telleExcp.printStackTrace();}
+			posX += sonPas;
+			saHauteur += sonPas;
+			if(posX > saLargeur-sonPas){
+				xVel = -1;
+				break;
+			}
+			if(saHauteur > laHauteur-sonPas){
+				yVel =-1;
+				break;
+			}
+		}
+    	return;
     }
     public void sud(){
+    	while(true){
+			repaint();
+			try{Thread.sleep(sonTemps);}
+			catch (InterruptedException telleExcp)
+			{telleExcp.printStackTrace();}
+			saHauteur += sonPas;
+			if(saHauteur > laHauteur-sonPas){
+				yVel =-1;
+				break;
+			}
+		}
+    	return;
     }
     public void sud_Ouest(){
+    	while(true){
+			repaint();
+			try{Thread.sleep(sonTemps);}
+			catch (InterruptedException telleExcp)
+			{telleExcp.printStackTrace();}
+			posX -= sonPas;
+			saHauteur += sonPas;
+			if(posX < sonPas){
+				xVel = 1;
+				break;
+			}
+			if(saHauteur > laHauteur-sonPas){
+				yVel =-1;
+				break;
+			}
+		}
+    	return;
     }
     public void ouest(){
+    	while(true){
+			repaint();
+			try{Thread.sleep(sonTemps);}
+			catch (InterruptedException telleExcp)
+			{telleExcp.printStackTrace();}
+			posX -= sonPas;
+			if(posX < sonPas){
+				xVel = 1;
+				break;
+			}
+		}
+    	return;
     }
+    
     public void nord_Ouest(){
+    	while(true){
+    		System.out.println("[X]: " + posX);
+    		System.out.println("[Y]: "  + saHauteur);
+    		System.out.println("");
+    		System.out.println("Côté: " + sonCote);
+    		System.out.println("\n");
+			repaint();
+			try{Thread.sleep(sonTemps);}
+			catch (InterruptedException telleExcp)
+			{telleExcp.printStackTrace();}
+			posX -= sonPas;
+			saHauteur -= sonPas;
+			if(posX < sonCote){
+				System.out.println("ah");
+				xVel = 1;
+				break;
+			}
+			if(saHauteur < sonPas){
+				yVel = 1;
+				return;
+			}
+		}
+    	System.out.println("Sortie de la fonction");
+    	return;
     }
     
 
     public void paintComponent(Graphics telCG)
     {
 	super.paintComponent(telCG);
-	telCG.fillRect(sonDebDessin, saHauteur/2, sonCote, sonCote);
+	telCG.fillRect(posX, saHauteur, sonCote, sonCote);
     }
 }

@@ -13,6 +13,7 @@ class UneFenetre extends JFrame implements ActionListener{
     private final int LARG=400, HAUT=300;
     private JButton bouton = new JButton("Pause");
     private Thread leTh;
+    private JPanel lePanel = new JPanel(new FlowLayout());
     
     public UneFenetre(){
     	// TODO 
@@ -25,6 +26,8 @@ class UneFenetre extends JFrame implements ActionListener{
     	this.setSize(465, HAUT);
     	this.setTitle("Typical DVD Screen");
     	this.setPreferredSize(getSize());
+    	this.setForeground(Color.CYAN);
+    	
     	
     	bouton.addActionListener(this);
     	bouton.setVisible(true);
@@ -32,6 +35,9 @@ class UneFenetre extends JFrame implements ActionListener{
     	
     	
     	sonMobile = new UnMobile(LARG, HAUT);
+    	sonMobile.setVisible(true);
+    	sonMobile.setBackground(Color.black);
+    	sonMobile.setSize(getMaximumSize());
     	this.add(sonMobile);
     	
     	leTh = new Thread(sonMobile);
